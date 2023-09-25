@@ -1,11 +1,15 @@
 package org.launchcode.techjobs.oo;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.testng.annotations.BeforeTest;
 
 import static org.junit.Assert.*;
 
 public class JobTest {
     //TODO: Create your unit tests here
+    private static final String newLine = System.lineSeparator();
+    Job newJob1 = new Job("Trash Patrol", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawk-eyes"));
     @Test
     public void testSettingsJobId() {
         Job newJob1 = new Job();
@@ -15,27 +19,97 @@ public class JobTest {
 
     @Test
     public void testJobConstructorSetsAllFields(){
-        Job newJob1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
-        //check String is not null
+
         assertTrue(newJob1.getName() instanceof String);
-        assertEquals("Product tester", newJob1.getName());
+        assertEquals("Trash Patrol", newJob1.getName());
         //checking employer
         assertTrue(newJob1.getEmployer() instanceof Employer);
-        assertEquals("ACME", newJob1.getEmployer().getValue());
+        assertEquals("A&B Cleaners", newJob1.getEmployer().getValue());
         //checking location
         assertTrue(newJob1.getLocation() instanceof Location);
-        assertEquals("Desert", newJob1.getLocation().getValue());
+        assertEquals("Nevada", newJob1.getLocation().getValue());
         //checking positionType
         assertTrue(newJob1.getPositionType() instanceof PositionType);
-        assertEquals("Quality control", newJob1.getPositionType().getValue());
+        assertEquals("Captain", newJob1.getPositionType().getValue());
         //checking CoreCompetency
         assertTrue(newJob1.getCoreCompetency() instanceof CoreCompetency);
-        assertEquals("Persistence", newJob1.getCoreCompetency().getValue());
+        assertEquals("Hawk-eyes", newJob1.getCoreCompetency().getValue());
     }
     @Test
     public void testJobsForEquality() {
-        Job newJob1 = new Job("Trash Patrol", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawkeyes"));
-        Job newJob2 = new Job("Trash Patrol", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawkeyes"));
+
+        Job newJob2 = new Job("Trash Patrol", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawk-eyes"));
         assertNotEquals(newJob1, newJob2);
     }
+    @Test
+    public void testToStringStartsAndEndsWithNewLine(){
+//checking for empytline before/after using hasEmptyLineAfter/Before?
+        String actualString = newJob1.toString();
+
+        assertTrue(actualString.startsWith(newLine));
+        assertTrue(actualString.endsWith(newLine));
+//        Job newJob2 = new Job("", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawk-eyes"));
+
+//        Job newJob3 = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+
+//        String testString = newLine + "ID: " + 1 +
+//                newLine + "Name: Trash Patrol" +
+//                newLine + "Employer: A&B Cleaners" +
+//                newLine + "Location: Nevada" +
+//                newLine + "Position Type: Captain" +
+//                newLine + "Core Competency: Hawk-eyes" + newLine;
+
+//        String testString2 = newLine + "ID: " + newJob2.getId() +
+//                newLine + "Name: " + newJob2.getName() +
+//                newLine + "Employer: " + newJob2.getEmployer().getValue() +
+//                newLine + "Location: " + newJob2.getLocation().getValue() +
+//                newLine + "Position Type: " + newJob2.getPositionType().getValue() +
+//                newLine + "Core Competency: " + newJob2.getCoreCompetency().getValue() + newLine;
+
+//        String testString3 = "OOPS! This job does not seem to exist";
+
+
+//        String actualString2= newJob2.toString();
+//        String actualString3 = newJob3.toString();
+
+//        assertEquals(testString, actualString);
+//        assertEquals(testString2, actualString2);
+//        assertEquals(testString3, actualString3);
+
+        }
+        @Test
+        public void testToStringContainsCorrectLabelsAndData(){
+            String testString = newLine + "ID: " + newJob1.getId() +
+                newLine + "Name: Trash Patrol" +
+                newLine + "Employer: A&B Cleaners" +
+                newLine + "Location: Nevada" +
+                newLine + "Position Type: Captain" +
+                newLine + "Core Competency: Hawk-eyes" + newLine;
+
+            String actualString = newJob1.toString();
+
+            assertEquals(testString, actualString);
+        }
+        @Test
+        public void testToSeeIfFieldUpdatesWhenEmpty() {
+            Job newJob2 = new Job("", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType(""), new CoreCompetency("Hawk-eyes"));
+
+            String testString2 =
+                    newLine + "ID: " + newJob2.getId() +
+                    newLine + "Name: " + "Data not available" +
+                    newLine + "Employer: A&B Cleaners" +
+                    newLine + "Location: Nevada" +
+                    newLine + "Position Type: Data not available" +
+                    newLine + "Core Competency: Hawk-eyes" + newLine;
+
+            String actualString2= newJob2.toString();
+
+            assertEquals(testString2, actualString2);
+        }
+        @Test
+        public void testForMsgWhenOnlyIdExists() {
+            Job newJob3 = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
+            String actualString = newJob3.toString();
+            assertEquals("OOPS! This job does not seem to exist.", actualString);
+        }
 }
