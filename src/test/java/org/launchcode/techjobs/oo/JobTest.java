@@ -11,7 +11,7 @@ public class JobTest {
     private static final String newLine = System.lineSeparator();
     Job newJob1 = new Job("Trash Patrol", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawk-eyes"));
     @Test
-    public void testSettingsJobId() {
+    public void testSettingJobId() {
         Job newJob1 = new Job();
         Job newJob2 = new Job();
         assertNotEquals(newJob1, newJob2);
@@ -48,33 +48,7 @@ public class JobTest {
 
         assertTrue(actualString.startsWith(newLine));
         assertTrue(actualString.endsWith(newLine));
-//        Job newJob2 = new Job("", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType("Captain"), new CoreCompetency("Hawk-eyes"));
 
-//        Job newJob3 = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
-
-//        String testString = newLine + "ID: " + 1 +
-//                newLine + "Name: Trash Patrol" +
-//                newLine + "Employer: A&B Cleaners" +
-//                newLine + "Location: Nevada" +
-//                newLine + "Position Type: Captain" +
-//                newLine + "Core Competency: Hawk-eyes" + newLine;
-
-//        String testString2 = newLine + "ID: " + newJob2.getId() +
-//                newLine + "Name: " + newJob2.getName() +
-//                newLine + "Employer: " + newJob2.getEmployer().getValue() +
-//                newLine + "Location: " + newJob2.getLocation().getValue() +
-//                newLine + "Position Type: " + newJob2.getPositionType().getValue() +
-//                newLine + "Core Competency: " + newJob2.getCoreCompetency().getValue() + newLine;
-
-//        String testString3 = "OOPS! This job does not seem to exist";
-
-
-//        String actualString2= newJob2.toString();
-//        String actualString3 = newJob3.toString();
-
-//        assertEquals(testString, actualString);
-//        assertEquals(testString2, actualString2);
-//        assertEquals(testString3, actualString3);
 
         }
         @Test
@@ -91,7 +65,7 @@ public class JobTest {
             assertEquals(testString, actualString);
         }
         @Test
-        public void testToSeeIfFieldUpdatesWhenEmpty() {
+        public void testToStringHandlesEmptyField() {
             Job newJob2 = new Job("", new Employer("A&B Cleaners"), new Location("Nevada"), new PositionType(""), new CoreCompetency("Hawk-eyes"));
 
             String testString2 =
